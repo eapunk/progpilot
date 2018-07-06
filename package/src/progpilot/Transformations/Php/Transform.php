@@ -185,7 +185,7 @@ class Transform implements Visitor
         }
 
         // because when we call (funccall) a function by name, it can be undefined
-        $this->context->get_functions()->add_function($myfunction->get_name(), $myfunction);
+        $this->context->get_functions()->add_function((string)$myfunction->get_name(), $myfunction);
         $this->context->set_current_func($myfunction);
     }
 
@@ -212,7 +212,7 @@ class Transform implements Visitor
             $class_name = $func->class->value;
         }
 
-        $myfunction = $this->context->get_functions()->get_function($func->name, $class_name);
+        $myfunction = $this->context->get_functions()->get_function((string)$func->name, $class_name);
 
         if (!is_null($myfunction)) {
             $myfunction->set_last_line($this->context->get_current_line());
