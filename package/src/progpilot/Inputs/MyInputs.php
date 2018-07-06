@@ -240,7 +240,7 @@ class MyInputs
                 }
 
                 if ($mysanitizer->is_instance() && $myfunc->is_type(MyFunction::TYPE_FUNC_METHOD)) {
-                    if (!is_null($myclass) && $mysanitizer->get_instanceof_name() === $myclass->get_name()) {
+                    if (empty($myclass) || $mysanitizer->get_instanceof_name() === $myclass->get_name()) {
                         return $mysanitizer;
                     }
 
@@ -278,7 +278,7 @@ class MyInputs
                 }
 
                 if ($mysink->is_instance() && $myfunc->is_type(MyFunction::TYPE_FUNC_METHOD)) {
-                    if (!is_null($myclass) && $mysink->get_instanceof_name() === $myclass->get_name()) {
+                    if (empty($myclass) || $mysink->get_instanceof_name() === $myclass->get_name()) {
                         return $mysink;
                     }
 
@@ -297,7 +297,7 @@ class MyInputs
                                 $object_id = $prop_class->get_object_id();
                                 $myclass = $context->get_objects()->get_myclass_from_object($object_id);
 
-                                if ($myclass->get_name() === $mysink_instance_name) {
+                                if (empty($myclass) || $myclass->get_name() === $mysink_instance_name) {
                                     return $mysink;
                                 }
                             }
