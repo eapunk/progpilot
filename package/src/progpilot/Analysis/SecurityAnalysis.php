@@ -96,10 +96,9 @@ class SecurityAnalysis
             $condition_respected = true;
 
             if ($mysink->has_parameters()) {
+                $condition_respected = false;
                 for ($i = 0; $i < $nb_params; $i ++) {
                     if ($mysink->is_parameter($i + 1)) {
-                        $condition_respected = false;
-
                         $mydef_arg = $instruction->get_property("argdef$i");
                         $tainted_expr = $mydef_arg->get_taintedbyexpr();
 
@@ -112,7 +111,7 @@ class SecurityAnalysis
                             }
                         }
 
-                        if (!$condition_respected) {
+                        if ($condition_respected) {
                             break;
                         }
                     }
